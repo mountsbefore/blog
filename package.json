@@ -1,0 +1,11 @@
+{
+	"name":"qzddBlog",
+	"version":"0.0.1",
+	"description":"Blog for qzdd.net",
+	"scripts":{"start":"run.js"},
+	"repository":{
+	"type":"git",
+	"url":"git://github.com/lidan-cn/blog.git"
+	},
+	"license":"MIT"
+}
