@@ -1,0 +1,12 @@
+{
+	"name":"frontofqzddblog",
+	"description":"front end of qzddblog",
+	"version":"0.0.1",
+	"devDependencies":{
+		
+	},
+	"dependencies":{
+		"bower":"latest"
+	},
+	"scripts":{}
+}
