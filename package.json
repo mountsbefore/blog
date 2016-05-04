@@ -1,11 +1,13 @@
 {
-	"name":"qzddBlog",
-	"version":"0.0.1",
+	"name":"qzddblog",
 	"description":"Blog for qzdd.net",
 	"scripts":{"start":"run.js"},
 	"repository":{
 	"type":"git",
 	"url":"git://github.com/lidan-cn/blog.git"
 	},
-	"license":"MIT"
+	"license":"MIT",
+	"author":"lidan<lidan@qzdd.net>",
+	"contributors":["ssping<514079588@qq.com>"],
+	
 }
