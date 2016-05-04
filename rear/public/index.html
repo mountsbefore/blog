@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>nodejs  page</title>
+</head>
+<body ng-app = "blog" ng-controller="myblog">
+	<h1> node js content</h1>
+	<button ng-click = "button()">button</button>
+	<div ng-bind="display"></div>
+	<button ng-click = "regist()">regist</button>
+	
+</body>
+
+
+<script type="text/javascript" src="angular.js"></script>
+
+<script type="text/javascript">
+	var blog =  angular.module("blog",[]);
+	blog.controller("myblog",["$http","$scope",function($http,$scope){
+		$scope.button= function(){
+			$http.post("/test").then(function(data){
+				console.log(data,"success");
+				$scope.display = data.data;
+			},function(err){
+				console.log("err : " + err)
+			});
+		};
+		$scope.regist = function(){
+			$http({
+				url:"/user/signup",
+				method:"post",
+				params:{user:{
+					name:"ssp7",
+					password:"ssp7"
+				}}
+			}).then(function(data){
+				console.log("successssssss...");
+			},function(err){
+					console.log("err.......")
+				});
+		};
+		
+	}]);
+
+</script>	
+</html>

@@ -5,7 +5,7 @@ var cookieParser = require('cookie-parser');
 var  db_connect_str = "mongodb://localhost/test"
 var mongoose = require('mongoose');
 
-var User = require("./app/model/user");
+var User = require("./application/model/user");
 
 mongoose.connect(db_connect_str);//；连接数据库
 
@@ -47,7 +47,7 @@ app.post("/test",function(req,res){
 });
 
 
-var server = app.listen(8000, function () {
+var server = app.listen(3000, function () {
 
   var host = server.address().address || "localhost";
   var port = server.address().port;
