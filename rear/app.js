@@ -29,6 +29,11 @@ app.use(session({
 app.use(express.static('public'));
 app.set("views","/")
 var userRouter = require("./router/userRouter.js")
+
+app.use(function(req,res,next){
+	res.setHeader("access-control-allow-orgin","*");
+	next();
+})
 app.use(userRouter)
 
 app.post("/test",function(req,res){
