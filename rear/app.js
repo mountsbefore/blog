@@ -31,7 +31,7 @@ app.set("views","/")
 var userRouter = require("./router/userRouter.js")
 
 app.use(function(req,res,next){
-	res.setHeader("access-control-allow-orgin","*");
+	res.setHeader("access-control-allow-origin","*");
 	next();
 })
 app.use(userRouter)
