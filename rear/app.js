@@ -7,7 +7,13 @@ var mongoose = require('mongoose');
 
 var User = require("./application/model/user");
 
-mongoose.connect(db_connect_str);//；连接数据库
+var db =  mongoose.createConnection(db_connect_str);//；连接数据库
+
+db.on('error',console.error.bind(console,'连接错误:'));
+db.once('open', function (callback) {
+  console.log("open.....")
+});
+
 
 var MongoStore = require('connect-mongo')(session)
 var router = express.Router();
