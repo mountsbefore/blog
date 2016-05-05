@@ -21,41 +21,47 @@ var app = express();
 app.use(cookieParser("secret"));
 
 
-app.use(session({
-	secret: '12345',
-	name: 'testapp',
-	cookie: {maxAge: 80000 },
-	resave: false,
-	saveUninitialized: true,
-	store: new MongoStore({   //创建新的mongodb数据库
-         url:db_connect_str
-     })
-}));
+// app.use(session({
+// 	secret: '12345',
+// 	name: 'testapp',
+// 	cookie: {maxAge: 80000 },
+// 	resave: false,
+// 	saveUninitialized: true,
+// 	store: new MongoStore({   //创建新的mongodb数据库
+//          url:db_connect_str
+//      })
+// }));
 
-app.use(express.static('public'));
-app.set("views","/")
-var userRouter = require("./router/userRouter.js")
-
-app.use(function(req,res,next){
-	res.setHeader("access-control-allow-origin","*");
-	next();
-})
-app.use(userRouter)
-
-app.post("/test",function(req,res){
-    console.log(__dirname)
-	// res.send("hello world");
-	req.session.user = "ssp";
-    var user = new User({
-        "name":"史少鹏5", 
-        "password" :"史少鹏5",
-        "role":10
-    });
-    user.save(function(err,data){
-        if(err){console.log(err)}
-    }); 
-    res.json({"success":"success"})
+// app.use(express.static('public'));
+// app.set("views","/")
+app.get('/', function (req, res) {
+	console.log("in home....")
+  res.send('Hello World!');
 });
+
+
+// var userRouter = require("./router/userRouter.js")
+
+// app.use(function(req,res,next){
+// 	res.setHeader("access-control-allow-origin","*");
+// 	next();
+// })
+// app.use(userRouter)
+
+// app.post("/test",function(req,res){
+//     console.log(__dirname)
+// 	// res.send("hello world");
+// 	req.session.user = "ssp";
+//     var user = new User({
+//         "name":"史少鹏5", 
+//         "password" :"史少鹏5",
+//         "role":10
+//     });
+//     user.save(function(err,data){
+//         if(err){console.log(err)}
+//     }); 
+//     res.json({"success":"success"})
+// });
 
 
 var server = app.listen(3000, function () {
