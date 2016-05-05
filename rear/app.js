@@ -7,13 +7,7 @@ var mongoose = require('mongoose');
 
 var User = require("./application/model/user");
 
-var db =  mongoose.createConnection(db_connect_str);//；连接数据库
-
-db.on('error',console.error.bind(console,'连接错误:'));
-db.once('open', function (callback) {
-  console.log("open.....")
-});
-
+mongoose.connect(db_connect_str);//；连接数据库
 
 var MongoStore = require('connect-mongo')(session)
 var router = express.Router();
@@ -21,50 +15,30 @@ var app = express();
 app.use(cookieParser("secret"));
 
 
-// app.use(session({
-// 	secret: '12345',
-// 	name: 'testapp',
-// 	cookie: {maxAge: 80000 },
-// 	resave: false,
-// 	saveUninitialized: true,
-// 	store: new MongoStore({   //创建新的mongodb数据库
-//          url:db_connect_str
-//      })
-// }));
+app.use(session({
+	secret: '12345',
+	name: 'testapp',
+	cookie: {maxAge: 80000 },
+	resave: false,
+	saveUninitialized: true,
+	store: new MongoStore({   //创建新的mongodb数据库
+         url:db_connect_str
+     })
+}));
 
-// app.use(express.static('public'));
+app.use(express.static('public'));
 // app.set("views","/")
-app.get('/', function (req, res) {
-	console.log("in home....")
-  res.send('Hello World!');
-});
+var userRouter = require("./router/userRouter.js")
+
+app.use(function(req,res,next){
+	res.setHeader("access-control-allow-origin","*");
+	next();
+})
+app.use(userRouter)
 
 
-// var userRouter = require("./router/userRouter.js")
 
-// app.use(function(req,res,next){
-// 	res.setHeader("access-control-allow-origin","*");
-// 	next();
-// })
-// app.use(userRouter)
-
-// app.post("/test",function(req,res){
-//     console.log(__dirname)
-// 	// res.send("hello world");
-// 	req.session.user = "ssp";
-//     var user = new User({
-//         "name":"史少鹏5", 
-//         "password" :"史少鹏5",
-//         "role":10
-//     });
-//     user.save(function(err,data){
-//         if(err){console.log(err)}
-//     }); 
-//     res.json({"success":"success"})
-// });
-
-
-var server = app.listen(3000, function () {
+var server = app.listen(8080, function () {
 
   var host = server.address().address || "localhost";
   var port = server.address().port;
