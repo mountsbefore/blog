@@ -2,17 +2,17 @@ var mongoose = require('mongoose')
 var User = mongoose.model('User')
 
 // signup
-exports.showSignup = function(req, res) {
-  res.render('signup', {
-    title: '注册页面'
-  })
-}
+// exports.showSignup = function(req, res) {
+//   res.render('signup', {
+//     title: '注册页面'
+//   })
+// }
 
-exports.showSignin = function(req, res) {
-  res.render('signin', {
-    title: '登录页面'
-  })
-}
+// exports.showSignin = function(req, res) {
+//   res.render('signin', {
+//     title: '登录页面'
+//   })
+// }
 
 exports.signup = function(req, res) {
   console.log(req.query)
@@ -26,22 +26,19 @@ exports.signup = function(req, res) {
     }
 
     if (user) {
-      return res.redirect('/signin')
+      return res.json({
+        "error":"name has exist"
+      })
     }
     else {
       console.log(_user,"_user........")
-      // var user = new User({
-      //   "name":"史少鹏6", 
-      //   "password" :"史少鹏6",
-      //   "role":10
-      // });
       user = new User(_user)
       user.save(function(err, user) {
         if (err) {
           console.log(err)
         }
 
-        res.redirect('/')
+        res.josn({result:"success"})
       })
     }
   })
@@ -49,7 +46,10 @@ exports.signup = function(req, res) {
 
 // signin
 exports.signin = function(req, res) {
-  var _user = req.body.user
+  var _user = req.query.user
+  console.log(_user,"user......");
+  _user = JSON.parse(_user);
+  console.log(_user,"userrrrr...")
   var name = _user.name
   var password = _user.password
 
@@ -59,7 +59,7 @@ exports.signin = function(req, res) {
     }
 
     if (!user) {
-      return res.redirect('/signup')
+      return res.json({"error":"user isn't exist"})
     }
 
     user.comparePassword(password, function(err, isMatch) {
@@ -70,10 +70,10 @@ exports.signin = function(req, res) {
       if (isMatch) {
         req.session.user = user
 
-        return res.redirect('/')
+        return res.json({result:"success"})
       }
       else {
-        return res.redirect('/signin')
+        return res.json({"error":"password wrong"})
       }
     })
   })
@@ -102,22 +102,22 @@ exports.list = function(req, res) {
 }
 
 // midware for user
-exports.signinRequired = function(req, res, next) {
-  var user = req.session.user
+// exports.signinRequired = function(req, res, next) {
+//   var user = req.session.user
 
-  if (!user) {
-    return res.redirect('/signin')
-  }
+//   if (!user) {
+//     return res.redirect('/signin')
+//   }
 
-  next()
-}
+//   next()
+// }
 
-exports.adminRequired = function(req, res, next) {
-  var user = req.session.user
+// exports.adminRequired = function(req, res, next) {
+//   var user = req.session.user
 
-  if (user.role <= 10) {
-    return res.redirect('/signin')
-  }
+//   if (user.role <= 10) {
+//     return res.redirect('/signin')
+//   }
 
-  next()
-}
+//   next()
+// }

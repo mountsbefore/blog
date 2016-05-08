@@ -8,15 +8,20 @@
 	<button ng-click = "button()">button</button>
 	<div ng-bind="display"></div>
 	<button ng-click = "regist()">regist</button>
-	
+	<button ng-click = "login()">login</button>
+	<button ng-click = "articlesave()">articlesave</button>
+	<button ng-click = "search()">test search populate</button>
 </body>
 
 
-<script type="text/javascript" src="angular.js"></script>
+<script type="text/javascript" src="./jquery.js"></script>
+<script type="text/javascript" src="./angular.js"></script>
 
 <script type="text/javascript">
-	var blog =  angular.module("blog",[]);
-	blog.controller("myblog",["$http","$scope",function($http,$scope){
+	
+	var my =  angular.module("blog",[]);
+	my.controller("myblog",["$http","$scope",function($http,$scope){
+		$scope.display = "nobody"
 		$scope.button= function(){
 			$http.post("/test").then(function(data){
 				console.log(data,"success");
@@ -25,22 +30,41 @@
 				console.log("err : " + err)
 			});
 		};
-		$scope.regist = function(){
+			
+		$scope.login =function(){
 			$http({
-				url:"/user/signup",
+				url:"/user/signin",
 				method:"post",
 				params:{user:{
-					name:"ssp9",
-					password:"ssp9"
+					name:"ssp7",
+					password:"ssp7"
 				}}
 			}).then(function(data){
-				console.log("successssssss...");
+				console.log(data,"success");
+				$scope.display = data.data;
 			},function(err){
-					console.log("err.......")
-				});
+				console.log("err : " + err)
+			});
 		};
+		$scope.articlesave =function (){
+			$http({
+				url:"/article/save",
+				method:"post"
+			}).success(function(data){
+				console.log("success.....artsave")
+			})
+		}
+		$scope.search = function (){
+			$http({
+				url:"/article/search",
+				method:"post"
+			}).success(function(data){
+				console.log(data)
+			});
+		}
 		
 	}]);
+	
 
 </script>	
 </html>
