@@ -9,8 +9,14 @@
 	<div ng-bind="display"></div>
 	<button ng-click = "regist()">regist</button>
 	<button ng-click = "login()">login</button>
-	<button ng-click = "articlesave()">articlesave</button>
 	<button ng-click = "search()">test search populate</button>
+    <span>name :</span>	<input ng-model = "article.article.name">
+    <span>content :</span>	<input ng-model = "article.article.content">
+
+    <button ng-click = "articlesave()">articlesave</button>
+    <br/>
+    <textarea style="width:400px;height:400px" ng-model = "article.article.all"></textarea>
+    <button ng-click = "search()">test search populate</button>
 </body>
 
 
@@ -46,20 +52,41 @@
 				console.log("err : " + err)
 			});
 		};
+		$scope.article = {
+			article:{
+				name:"",
+				content:"",
+				all:""
+			}
+		}
 		$scope.articlesave =function (){
+			var article = {
+				article:{
+				name:$scope.article.article.name,
+				content:$scope.article.article.content
+				}
+			}
 			$http({
 				url:"/article/save",
-				method:"post"
+				method:"post",
+				params:article
 			}).success(function(data){
 				console.log("success.....artsave")
 			})
 		}
+
 		$scope.search = function (){
 			$http({
 				url:"/article/search",
 				method:"post"
 			}).success(function(data){
 				console.log(data)
+				var js = "";
+				var json = data.map(function(value){
+					console.log(angular.toJson(value));
+					$scope.article.article.all += angular.toJson(value)
+				})
+				// $scope.article.article.all = json;
 			});
 		}
 		
