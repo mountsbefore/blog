@@ -1,3 +1,33 @@
 {
-	
+  "name": "frontofqzddblog",
+  "description": "front end of qzddblog",
+  "main": "index.html",
+  "authors": [
+    "LiDan <it@qzdd.net>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "qzdd"
+  ],
+  "homepage": "https://github.com/lidan-cn/blog",
+  "moduleType": [
+    "amd"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "libs/",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2",
+    "angular": "~1.5",
+    "requirejs": "~2.2.0",
+    "lodash": "~4",
+    "semantic-ui": "~2",
+    "angular-ui-router": "~1",
+    "restangular": "~1"
+  }
 }

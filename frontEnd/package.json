@@ -4,10 +4,24 @@
   "version": "0.0.1",
   "devDependencies": {
     "bower":"latest",
-    "gulp":"latest"
+    "gulp":"latest",
+    "gulp-concat":"",
+    "gulp-package":"",
+    "gulp-uglify":""
   },
   "dependencies": {
-    "express":""
+    "express":"~4"
   },
-  "scripts": {}
+  "scripts": {
+    "postinstall":"bower install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/lidan-cn/blog.git"
+  },
+  "license": "MIT",
+  "author": "lidan<lidan@qzdd.net>",
+  "contributors": [
+    "ssping<514079588@qq.com>"
+  ]
 }
