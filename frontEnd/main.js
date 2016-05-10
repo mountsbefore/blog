@@ -44,9 +44,12 @@ require(['angular', 'common'], function (angular, app) {
     }]);
 
 
-
     //TODO:app.configRouter([all modules ])
-    app.configRouter('register/config');
 
-    angular.bootstrap(document.querySelector('html'), [app.name]);
+    app.configRouter('register/config');
+    setTimeout(function () {
+        app.requires = ['register'];
+        angular.bootstrap(document.querySelector('html'), [app.name]);
+
+    },1000);
 });

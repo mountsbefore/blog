@@ -1,12 +1,13 @@
-// 加载是否单实例,父模块加载依赖后,子模块是否需加载相同模块(不需如果能保证父模块已经加载,最好自己加载,都是单实例)
+// 各个业务模块被common主模块所依赖才能工作,config注册的函数,run注册的函数才能执行,
+// 业务模块早于主模块加载,所以各业务模块自己加载自己的依赖即时有共同依赖
 define(['angular'], function (angular) {
     // config state
-    var module = angular.module('register', []);
+    var module = angular.module('register', ['ui.router']);
     module.routerRules = [{
         "name": "register",
         "url":"/register",
         "template": "<span ng-bind='user'></span>",
-        "controller": "register.indexCtrl",
+        "controller": "registerCtrl",
         "ctrlPath": "register/controller/indexCtrl"
     }];
     // service
