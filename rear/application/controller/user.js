@@ -47,9 +47,7 @@ exports.signup = function(req, res) {
 // signin
 exports.signin = function(req, res) {
   var _user = req.query.user
-  console.log(_user,"user......");
   _user = JSON.parse(_user);
-  console.log(_user,"userrrrr...")
   var name = _user.name
   var password = _user.password
 
