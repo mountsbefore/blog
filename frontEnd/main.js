@@ -31,10 +31,11 @@ require.config({
 require(['angular', 'common'], function (angular, app) {
     // 配置路由不存在处理函数
     /*app.config(['$urlRouterProvider', function ($urlRouterProvider) {
-        $urlRouterProvider.otherwise('/error');
-    }]);*/
-    app.config([ function () {
-        console.log('app config',new Date().getTime());
+     $urlRouterProvider.otherwise('/error');
+     }]);*/
+    app.config(['$urlRouterProvider',function ($urlRouterProvider) {
+        console.log('app config', new Date().getTime());
+        $urlRouterProvider.otherwise('/register');
     }]);
     app.run(['$rootScope', '$state', function ($rootScope, $state) {
         $rootScope.$on('$stateNotFound', function (event, unfoundState, from, fromParams) {
@@ -46,10 +47,9 @@ require(['angular', 'common'], function (angular, app) {
 
     //TODO:app.configRouter([all modules ])
 
-    app.configRouter('register/config');
-    setTimeout(function () {
-        app.requires = ['register'];
+    app.configRouter(['register/config']).then(function () {
+        app.requires.push('register');
+        console.log('push');
         angular.bootstrap(document.querySelector('html'), [app.name]);
-
-    },1000);
+    });
 });
