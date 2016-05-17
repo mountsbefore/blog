@@ -80,8 +80,9 @@
 				url:"/article/search",
 				method:"post"
 			}).success(function(data){
-				console.log(data)
-				var js = "";
+				console.log(data )
+				var js = ""; 
+				if (data.length == 0 ) { return; };
 				var json = data.map(function(value){
 					console.log(angular.toJson(value));
 					$scope.article.article.all += angular.toJson(value)
