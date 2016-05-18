@@ -17,6 +17,9 @@
     <br/>
     <textarea style="width:400px;height:400px" ng-model = "article.article.all"></textarea>
     <button ng-click = "search()">test search populate</button>
+    <button ng-click = "getExcel()">getExcel</button>
+    <button ng-click = "getImage()">getImage</button>
+    <img ng-src="{{image}}">
 </body>
 
 
@@ -89,6 +92,25 @@
 				})
 				// $scope.article.article.all = json;
 			});
+		}
+		$scope.getExcel = function (){
+			$http({
+				url:"/article/getExcel",
+				method:"post"
+			}).success(function (data){
+				console.log(data,"getExcel.....");
+			});
+		}
+		$scope.image ="";
+		$scope.getImage = function (){
+			// $http({
+			// 	url:"/article/getImage" ＋ new Date(),
+			// 	method:"get"
+			// }).success(function (data){
+			// 	console.log(data)
+			// 	$scope.image = data;
+			// });
+			$scope.image = "/article/getImage?time=" + new Date();
 		}
 		
 	}]);

@@ -1,7 +1,8 @@
 var mongoose = require('mongoose')
 var User = mongoose.model('User');
 var Article = mongoose.model('Article')
-
+var xls = require("node-xlsx")
+var ccap = require('ccap')();
 
 exports.save = function (req,res){
 	var art = req.query.article;
@@ -43,6 +44,20 @@ exports.search = function (req,res){
 		res.json({error:"user isn't login"});
 	};
 
+}
+//__dirname  是当前代码页面大相对位置。
+exports.getExcel = function (req,res){
+    var list = xls.parse(__dirname + '/品种交接.xlsx');
+    console.log(JSON.stringify(list));
+    res.json(JSON.stringify(list));
+}
+exports.getImage = function (req,res){
+	var ary = ccap.get();
+	var txt = ary[0];
+
+    var buf = ary[1];
+    console.log(txt,buf);
+    res.end(buf);
 }
 
 /*

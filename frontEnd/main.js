@@ -51,5 +51,5 @@ require(['angular', 'common'], function (angular, app) {
         app.requires = ['register'];
         angular.bootstrap(document.querySelector('html'), [app.name]);
 
-    },1000);
+    },100);
 });

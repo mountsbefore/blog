@@ -51,6 +51,9 @@ app.use(session({
 app.get("/test",function(req,res){
 	res.json({test:"success"})
 })
+console.log(__dirname + '../'+'frontEnd' )
+// app.use(express.static("/Users/myapple/Desktop/blog/frontEnd"));
+// app.use(express.static(__dirname + "/../frontEnd"));
 app.use(express.static('public'));
 
 var userRouter = require("./router/userRouter.js");
