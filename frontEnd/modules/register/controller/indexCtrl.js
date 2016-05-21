@@ -6,6 +6,6 @@ define([], function () {
     ctrl.$inject = ['$scope'];
 
     console.log(Object.getOwnPropertyDescriptor(ctrl,'name'));
-    ctrl.registerName = 'registerCtrl'; // 这里不能使用name属性,function name属性不可写,匿名函数name属性值是""
+    ctrl.registerName = 'register.ctrl'; // 这里不能使用name属性,function name属性不可写,匿名函数name属性值是""
     return ctrl;
 });

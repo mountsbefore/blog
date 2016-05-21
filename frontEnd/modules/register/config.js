@@ -7,8 +7,11 @@ define(['angular'], function (angular) {
         "name": "register",
         "url":"/register",
         "template": "<span ng-bind='user'></span>",
-        "controller": "registerCtrl",
-        "ctrlPath": "register/controller/indexCtrl"
+        "controller": "register.ctrl",
+        "ctrlPath": ["register/controller/indexCtrl"]
+
+        // servicePath
+        // directivePath
     }];
     // service
 
