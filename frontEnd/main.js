@@ -54,3 +54,4 @@ require(['angular', 'common',
     angular.bootstrap(document.querySelector('html'), [app.name]);
 
 });
+
