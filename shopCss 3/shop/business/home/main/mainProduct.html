@@ -1,0 +1,353 @@
+<!--header开始-->
+<div style="margin-top:70px" am-show>
+    <div class = "homefix">
+        <div class="home-title">
+            <span class="am-icon-heart-o am-fl home-icon"ng-click="goCollect()"></span>
+            <span class="am-serif">熊笨熊</span>
+            <span class="am-icon-search am-fr home-icon"ng-click="goSearch()"></span>
+        </div>
+        <!--header结束-->
+        <!-- menustart -->
+        <div class="home-menu">
+            <ul class = "am-avg-sm-5">
+                <li ng-class = "{'menusixactive':currentMenu == 2}" ng-click = "curMenuDegist(currentMenu,2);switchMenuContent()">首页</li>
+                <li ng-class = "{'menusixactive':currentMenu == 3}" ng-click = "curMenuDegist(currentMenu,3);switchMenuContent()">鲜果</li>
+                <!-- <li ng-class = "{'menusixactive':currentMenu == 4}" ng-click = "curMenuDegist(currentMenu,4);switchMenuContent()">零食</li> -->
+                <li ng-class = "{'menusixactive':currentMenu == 5}" ng-click = "curMenuDegist(currentMenu,5);switchMenuContent()">坚果</li>
+                <!-- <li ng-class = "{'menusixactive':currentMenu == 6}" ng-click = "curMenuDegist(currentMenu,6);switchMenuContent()">养生</li> -->
+                <li ng-class = "{'menusixactive':currentMenu == 7}" ng-click = "curMenuDegist(currentMenu,7);switchMenuContent()">进口</li>
+                <li ng-class = "{'menusixactive':currentMenu == 8}" ng-click = "curMenuDegist(currentMenu,8);switchMenuContent()">特产</li>
+            </ul>
+        </div>        
+    </div>
+
+    <!-- menuend -->
+    <!--内容区域开始-->
+    <div  class="am-u-sm-12 am-u-sm-centered" id="contant">
+        <!-- slider start -->
+        <div am-swiper-plug options = "slideFruitData"></div>
+        <!-- slider end -->
+
+        <!-- 小熊来啦 -->
+        <div ng-if="currentMenu == 2">
+            <div class="am-u-sm-12  am-tabs home-tabItem">
+                <div class = "center-title">
+                    <span class = "text">小熊来啦</span>
+                    
+                </div>
+                <div class="am-u-sm-12 am-active home-tabItemCont" id="tab1" style="display: block;background-color: #fbfbfb">
+                    <ul>
+                        <li class="am-u-sm-12" ng-repeat = "p in displayDataForMenu[2].slice(5,8) track by $index" ng-click = "gotoProductDetail(p.id)">
+                            <img src = "lib/images/wall.png" lazy-src="{{serviceAddress + p.pictures['全尺寸'][0].url+'?t='+timeValueMain}}" class="am-img-responsive" alt="图片"/ >
+                            
+                            <p>{{p.description}}</p>
+                            <p>{{p.detail}}</p>
+                            <p><span>疯抢价</span><span>￥{{p.real_price}}</span><span class="home-beforeValue">￥{{p.price}}</span></p>
+                        </li>
+                       
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 小熊来啦 -->
+    <!-- 今日上新 -->
+    <div ng-if="currentMenu == 2" class="am-u-sm-12 home-item home-img2">
+        <div>
+            <h2 class="am-serif ready">ARE YOU READY?</h2>
+            <h2 class="am-serif">今日上新</h2>
+        </div>
+        <div>
+            <ul>
+                <li class="am-u-sm-6"  ng-repeat = "p in displayDataForMenu[2].slice(8,12) track by $index" ng-click = "gotoProductDetail(p.id)">
+                    <a><img src = "lib/images/wall.png" lazy-src="{{serviceAddress + p.pictures['全尺寸'][0].url+'?t='+timeValueMain}}" alt="" class="am-img-responsive"/></a>
+                    <div class="home-itemFont">
+                        <p>{{p.detail}}</p>
+                        <p class="home-value">￥{{p.real_price}} <span>抢购</span></p>
+                    </div>
+                </li>
+                
+            </ul>
+        </div>
+        <div class="am-u-sm-12 am-serif am-text-center home-linkMore"><a href="#">更多 <span class="am-icon-caret-right"></span></a></div>
+    </div>
+    <!-- 今日上新 -->
+
+    <!-- 超值热卖 -->
+    <div ng-if="currentMenu == 2">
+            <div class="am-u-sm-12 ">
+                <div class = "center-title">
+                    <span class = "text">超值热卖中</span>
+                </div>
+                <div class="am-u-sm-12 am-active home-tabItemCont" id="tab1" style="display: block;background-color: #fbfbfb">
+                    
+                    <div>
+                        <div class="am-u-sm-12" ng-repeat = "p in displayDataForMenu[2].slice(12,15) track by $index" ng-click = "gotoProductDetail(p.id)">
+                            <img src = "lib/images/wall.png" lazy-src="{{serviceAddress + p.pictures['全尺寸'][0].url+'?t='+timeValueMain}}" class="am-img-responsive" alt="图片"/>
+                            <p>{{p.description}}</p>
+                            <p>{{p.detail}}</p>
+                            <p><span>疯抢价</span><span>￥{{p.real_price}}</span><span class="home-beforeValue">￥{{p.price}}</span></p>
+                        </div>
+                        
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 超值热卖 -->
+
+
+    <div ng-show="currentMenu == 2" class="am-u-sm-12 home-item am-animation-fade am-animation-delay-2" ng-cloak>
+        <div class="am-u-sm-12">
+            
+            <div class = "center-title">
+                <span class = "text">点赞超值购</span>
+            </div>
+
+
+            <div class="am-u-sm-12">
+                <div class="am-u-sm-12 home-goods">
+                    <div class="home-avg">
+                        <!-- <img src="lib/images/jprod1.jpg" class="am-img-responsive" alt="图"/> -->
+                        <div style="width:33.33%;float:left;" ng-repeat = "p in displayDataForMenu[2].slice(12,18) track by $index"  ng-click = "gotoProductDetail(p.id)">
+                            <span >
+                                <img src = "lib/images/square.png" lazy-src="{{serviceAddress + p.pictures['方正'][0].url+'?t='+timeValueMain}}" class="am-img-responsive am-circle" alt="图"/>
+                            </span>
+                        </div>
+                    </div>
+                    <div class = "am-u-sm-12 center-title">
+                        <span class = "text">【精选推荐】【点击进入详情】</span>                   
+                    </div>
+               
+                </div>
+                <!-- All screen 1 -->
+                <div class="am-u-sm-12 home-goods" ng-repeat = "p in displayDataForMenu[2].slice(18,20) track by $index" ng-click = "gotoProductDetail(p.id)">
+                    <a><img src = "lib/images/wall.png" lazy-src="{{serviceAddress + p.pictures['全尺寸'][0].url+'?t='+timeValueMain}}" class="am-img-responsive" alt="图"/></a>
+                    <p>{{p.description}}</p>
+                    <p> {{p.detail}} <span>{{p.real_price}}元</span></p>
+                </div>
+                
+            </div>
+        </div>
+
+        <div class="am-u-sm-12" style = "margin-bottom:50px">
+            <div class = "center-title">
+                <span class = "text">小熊众筹</span>
+            </div>
+
+
+            <!-- swiper -->
+            <div am-swiper-plug-hor options = "slideFruitDataHor" style="width: 100%; overflow: hidden;"></div>
+            <!-- swiper -->
+
+            <div class="am-u-sm-12" style = "margin-top:30px;">
+                <div class="am-u-sm-12 home-recommend" ng-repeat = "p in displayDataForMenu[2].slice(26,31) track by $index" ng-click = "gotoProductDetail(p.id)">
+                    <img src = "lib/images/wall.png" lazy-src="{{serviceAddress + p.pictures['全尺寸'][0].url +'?t='+timeValueMain}}"  class="am-img-responsive" alt="图"/>
+                    <p>
+                        {{p.description}}
+                        {{p.detail}}<br>
+                        {{p.real_price}}元
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- page2 -->
+    <div ng-show = "currentMenu == 3" class = "am-animation-fade am-animation-delay-1">
+        <div class="am-u-sm-12 home-item" >
+            <div class="am-u-sm-12" >
+                <h2 class="title">{{displayDataForMenu[3][0].categories[0].name}}</h2>
+                <div class="home-valueGoodsList" ng-click = "gotoProductDetail(displayDataForMenu[3][0].id)">
+                    <div class="am-u-sm-12 home-goods">
+                        <a><img src = "lib/images/square.png" lazy-src="{{serviceAddress+displayDataForMenu[3][0].pictures['轮播'][0].url+'?t='+timeValueMain}}" class="am-img-responsive" alt="图"/></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="am-u-sm-12 home-item" style= "margin-bottom:50px">
+            <div>
+                <h2 class="am-serif">水果忍者来袭</h2>
+                <h2 class="am-serif">爆炸新鲜</h2>
+            </div>
+            <ul>
+                <li class="am-u-sm-6 " ng-repeat = "p in displayDataForMenu[3] track by $index" ng-click = "gotoProductDetail(p.id)">
+                    <a><img src = "lib/images/square.png" lazy-src="{{serviceAddress + p.pictures['方正'][0].url +'?t='+timeValueMain}}"  alt="" class="am-img-responsive"/></a>
+                    <div class="home-itemFont">
+                        <p>{{p.detail.substring(0,15)}}</p>
+                        <p class="value"> <span>抢购{{p.real_price}}元</span></p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+   <!-- page2end  -->
+   <!-- page3start -->
+    <div ng-show = "currentMenu == 4" class = "am-animation-fade am-animation-delay-1">
+
+        <div class="am-u-sm-12 home-item">
+            <div class="am-u-sm-12">
+                <h2 class="title">{{displayDataForMenu[4][0].categories[0].name}}</h2>
+                <div class="home-valueGoodsList" ng-click = "gotoProductDetail(displayDataForMenu[4][0].id)">
+                    <div class="am-u-sm-12 am-u-md-6 home-goods">
+                        <a><img src = "lib/images/square.png" lazy-src="{{serviceAddress+displayDataForMenu[4][0].pictures['轮播'][0].url+'?t='+timeValueMain}}" class="am-img-responsive" alt="图"/></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="am-u-sm-12 home-item" style= "margin-bottom:50px">
+            <div class="am-u-sm-12">
+                <h2 class="am-serif">超级享受</h2>
+                <h2 class="am-serif">随时零食</h2>
+            </div>
+            <ul class="am-u-sm-12">
+                <li class="am-u-sm-6 am-u-md-4 am-u-lg-3" ng-repeat = "p in displayDataForMenu[4] track by $index" ng-click = "gotoProductDetail(p.id)">
+                    <a><img src = "lib/images/square.png" lazy-src="{{serviceAddress + p.pictures['方正'][0].url +'?t='+timeValueMain}}"  alt="" class="am-img-responsive"/></a>
+                    <div class="home-itemFont">
+                        <p>{{p.detail.substring(0,15)}}</p>
+                        <p class="value"> <span>抢购{{p.real_price}}元</span></p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+    <!--page3end  -->
+    <!-- page4start -->
+     <div ng-show = "currentMenu == 5" class = "am-animation-fade am-animation-delay-1">
+        
+        <div class="am-u-sm-12 home-item" >
+            <div class="am-u-sm-12" >
+                <h2 class="title">{{displayDataForMenu[5][0].categories[0].name}}</h2>
+                <div class="home-valueGoodsList" ng-click = "gotoProductDetail(displayDataForMenu[5][0].id)">
+                    <div class="am-u-sm-12 am-u-md-6 home-goods">
+                        <a><img src = "lib/images/square.png" lazy-src="{{serviceAddress+displayDataForMenu[5][0].pictures['轮播'][0].url+'?t='+timeValueMain}}" class="am-img-responsive" alt="图"/></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="am-u-sm-12 home-item" style= "margin-bottom:50px">
+            <div>
+                <h2 class="am-serif">开心坚果</h2>
+                <h2 class="am-serif">嘎嘣嘎嘣脆</h2>
+            </div>
+            <ul>
+                <li class="am-u-sm-6 am-u-md-4 am-u-lg-3" ng-repeat = "p in displayDataForMenu[5] track by $index" ng-click = "gotoProductDetail(p.id)">
+                    <a><img src = "lib/images/square.png" lazy-src="{{serviceAddress + p.pictures['方正'][0].url+'?t='+timeValueMain}}"  alt="" class="am-img-responsive"/></a>
+                    <div class="home-itemFont">
+                        <p>{{p.detail.substring(0,15)}}</p>
+                        <p class="value"> <span>抢购{{p.real_price}}元</span></p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+     </div>
+     <!-- page4end -->
+    <!-- page5start -->
+    <div ng-show = "currentMenu == 6" class = "am-animation-fade am-animation-delay-1">
+        <div class="am-u-sm-12 home-item" >
+            <div class="am-u-sm-12 " >
+                <h2 class="title">{{displayDataForMenu[6][0].categories[0].name}}</h2>
+                <div class="home-valueGoodsList" ng-click = "gotoProductDetail(displayDataForMenu[6][0].id)">
+                    <div class="am-u-sm-12 am-u-md-6 home-goods">
+                        <a><img src = "lib/images/square.png" lazy-src="{{serviceAddress+displayDataForMenu[6][0].pictures['轮播'][0].url+'?t='+timeValueMain}}" class="am-img-responsive" alt="图"/></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="am-u-sm-12 home-item" style= "margin-bottom:50px">
+            <div>
+                <h2 class="am-serif">滋补营养</h2>
+                <h2 class="am-serif">健康生活</h2>
+
+            </div>
+            <ul>
+                <li class="am-u-sm-6 am-u-md-4 am-u-lg-3" ng-repeat = "p in displayDataForMenu[6] track by $index" ng-click = "gotoProductDetail(p.id)">
+                    <a><img src = "lib/images/square.png" lazy-src="{{serviceAddress + p.pictures['方正'][0].url+'?t='+timeValueMain}}"  alt="" class="am-img-responsive"/></a>
+                    <div class="home-itemFont">
+                        <p>{{p.detail.substring(0,15)}}</p>
+                        <p class="value"> <span>抢购{{p.real_price}}元</span></p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+    <!-- page5end -->
+    <!-- page6start -->
+    <div ng-show = "currentMenu == 7" class = "am-animation-fade am-animation-delay-1">
+        <div class="am-u-sm-12 home-item" >
+            <div class="am-u-sm-12" >
+                <h2 class="title">{{displayDataForMenu[7][0].categories[0].name}}</h2>
+                <div class="home-valueGoodsList" ng-click = "gotoProductDetail(displayDataForMenu[7][0].id)">
+                    <div class="am-u-sm-12 am-u-md-6 home-goods">
+                        <a><img src = "lib/images/square.png" lazy-src="{{serviceAddress+displayDataForMenu[7][0].pictures['轮播'][0].url+'?t='+timeValueMain}}" class="am-img-responsive" alt="图"/></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="am-u-sm-12 home-item" style= "margin-bottom:50px">
+            <div>
+                <h2 class="am-serif">快乐生活</h2>
+                <h2 class="am-serif">尽在上等品质生活</h2>
+            </div>
+            <ul>
+                <li class="am-u-sm-6 am-u-md-4 am-u-lg-3" ng-repeat = "p in displayDataForMenu[7] track by $index" ng-click = "gotoProductDetail(p.id)">
+                    <a><img src = "lib/images/square.png" lazy-src="{{serviceAddress + p.pictures['方正'][0].url+'?t='+timeValueMain}}"  alt="" class="am-img-responsive"/></a>
+                    <div class="home-itemFont">
+                        <p>{{p.detail.substring(0,15)}}</p>
+                        <p class="value"> <span>抢购{{p.real_price}}元</span></p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        
+    </div>
+     <!-- page6end -->
+     <!-- page7start -->
+    <div ng-show = "currentMenu == 8" class = "am-animation-fade am-animation-delay-1">
+        <div class="am-u-sm-12 home-item" >
+            <div class="am-u-sm-12 ">
+                <h2 class="title">{{displayDataForMenu[8][0].categories[0].name}}</h2>
+                <div class="home-valueGoodsList" ng-click = "gotoProductDetail(displayDataForMenu[8][0].id)">
+                    <div class="am-u-sm-12 am-u-md-6 home-goods">
+                        <a><img src = "lib/images/square.png" lazy-src="{{serviceAddress+displayDataForMenu[8][0].pictures['轮播'][0].url+'?t='+timeValueMain}}" class="am-img-responsive" alt="图"/></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="am-u-sm-12 home-item" style= "margin-bottom:50px">
+            <div>
+                <h2 class="am-serif">回家带美食</h2>
+                <h2 class="am-serif">尽在健康特产</h2>
+            </div>
+            <ul>
+                <li class="am-u-sm-6 am-u-md-4 am-u-lg-3" ng-repeat = "p in displayDataForMenu[8] track by $index" ng-click = "gotoProductDetail(p.id)">
+                    <a><img src = "lib/images/square.png" lazy-src="{{serviceAddress + p.pictures['方正'][0].url+'?t='+timeValueMain}}"  alt="" class="am-img-responsive"/></a>
+                    <div class="home-itemFont">
+                        <p>{{p.detail.substring(0,15)}}</p>
+                        <p class="value"> <span>抢购{{p.real_price}}元</span></p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        
+    </div> 
+     <!-- page7end -->
+
+</div>
+<!--内容区域结束-->
+<!-- <div ui-view></div> -->
+
+
+
